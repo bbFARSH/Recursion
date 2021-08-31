@@ -2,7 +2,8 @@
 using namespace std;
 //#define factorial
 //#define findpower
-#define fibo
+//define fibo
+void Fibon(int n, int a = 0, int b = 1);
 #ifdef factorial
 int factorial(int n)
 {
@@ -28,10 +29,16 @@ int power(int n, int k)
 {
 	if (k == 0)
 		return 1;
+	if (k < 0)
+	{
+		return 1./n * (power n, k + 1);
+	}
+
 	else if (k == 1)
 		return n;
 	else
 		return n * power(n, k - 1);
+	// return k == 0 ? 1 : k > 0 ? n * power(n , k - 1) : 1. / n * power (n, k + 1);
 }
 
 int main()
@@ -70,3 +77,23 @@ int main()
 	}
 }
 #endif // fibo
+
+void Fibon(int n, int a, int b)
+{
+	static int c = 1;
+	if (a > n) return;
+	cout << a << "\t";
+	Fibon(n, b, a + b);
+	/* a = b;
+	 b = c;
+	c = a + b; */
+	c = (a = b) + (b = c);
+	
+}
+int main()
+{
+	setlocale(LC_ALL, "Ru");
+	int n;
+	cout << "¬ведите значение до которого будет выводитс€ число фибоначчи: "; cin >> n;
+	Fibon(n);
+}
